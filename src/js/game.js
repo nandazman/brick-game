@@ -24,7 +24,7 @@ export default class Game {
     this.bricks = [];
     this.currentLevel = 0;
     this.levels = levels;
-    new InputHandler(this.paddle, this);
+    new InputHandler(this.paddle, this, GAMESTATE);
     this.resetLives();
   }
 
@@ -39,17 +39,16 @@ export default class Game {
 
 
   update(deltaTime) {
-    if (this.lives === 0) {
-      this.gamestate = GAMESTATE.GAMEOVER;
-      this.resetLives();
-    }
+    // if (this.lives === 0) {
+    //   this.gamestate = GAMESTATE.GAMEOVER;
+    //   this.resetLives();
+    // }
     if (
       this.gamestate === GAMESTATE.PAUSED ||
       this.gamestate === GAMESTATE.MENU ||
       this.gamestate === GAMESTATE.GAMEOVER
       ) return;
     [...this.gameBObjects, ...this.bricks].forEach((object) => object.update(deltaTime));
-      console.log(this.bricks)
     if (this.bricks.length === 0) {
       this.currentLevel++;
       this.gamestate = GAMESTATE.NEWLEVEL;
