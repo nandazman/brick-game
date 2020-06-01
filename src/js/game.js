@@ -39,10 +39,10 @@ export default class Game {
 
 
   update(deltaTime) {
-    // if (this.lives === 0) {
-    //   this.gamestate = GAMESTATE.GAMEOVER;
-    //   this.resetLives();
-    // }
+    if (this.lives === 0) {
+      this.gamestate = GAMESTATE.GAMEOVER;
+      this.resetLives();
+    }
     if (
       this.gamestate === GAMESTATE.PAUSED ||
       this.gamestate === GAMESTATE.MENU ||

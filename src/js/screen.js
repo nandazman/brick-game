@@ -21,7 +21,7 @@ export function menu(ctx, game) {
   ctx.font = FONT;
   ctx.fillStyle = FILL_TEXT_COLOR;
   ctx.textAlign = ALIGN;
-  ctx.fillText("Press SPACEBAR To Start", game.gameWidth / 2, game.gameHeight / 2);
+  ctx.fillText("Press SPACEBAR or Click To Start", game.gameWidth / 2, game.gameHeight / 2);
 }
 
 export function gameOver(ctx, game) {
@@ -33,5 +33,5 @@ export function gameOver(ctx, game) {
   ctx.fillStyle = FILL_TEXT_COLOR;
   ctx.textAlign = ALIGN;
   ctx.fillText("GAME OVER", game.gameWidth / 2, game.gameHeight / 2);
-  ctx.fillText("Press SPACEBAR To Restart", game.gameWidth / 2, game.gameHeight / 2 + 50);
+  ctx.fillText("Press SPACEBAR or Click To Restart", game.gameWidth / 2, game.gameHeight / 2 + 50);
 }

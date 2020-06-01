@@ -33,7 +33,7 @@ export default class InputHandler {
       }
     })
 
-    document.addEventListener('touchstart', (event) => {
+    document.addEventListener('mousedown', (event) => {
       const halfScreen = window.innerWidth / 2;
       if (game.gamestate === state.MENU || game.gamestate === state.GAMEOVER) {
         game.start();
@@ -46,7 +46,7 @@ export default class InputHandler {
       }
     })
 
-    document.addEventListener('touchend', () => {
+    document.addEventListener('mouseup', (event) => {
       if (game.gamestate === state.RUNNING) {
         if (paddle.speed < 0) paddle.stop();
         if (paddle.speed > 0) paddle.stop();
