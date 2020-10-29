@@ -36,11 +36,11 @@ export function generateRandomObstacles(rows) {
     emptyObstacle = 0;
     obstacles.push(row);
   }
-  console.log({obstacles})
   return obstacles;
 }
 
 function randomObstacle(emptyObstacle) {
-  if (emptyObstacle === 3) return 1;
+  const MAX_EMPTY_OBSTACLES = 3;
+  if (emptyObstacle === MAX_EMPTY_OBSTACLES) return 1;
   return Math.round(Math.random())
 }

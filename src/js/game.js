@@ -1,6 +1,7 @@
 import Paddle from "./paddle.js";
 import InputHandler from "./input.js";
 import Ball from "./ball.js";
+import Life from "./life.js";
 
 import { buildLevel, generateRandomObstacles } from "./levels.js";
 import { pause, menu, gameOver } from "./screen.js";
@@ -15,22 +16,23 @@ const GAMESTATE = {
 
 export default class Game {
   constructor(gameWidth, gameHeight) {
+    this.resetLives();
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
     this.gamestate = GAMESTATE.MENU;
     this.ball = new Ball(this);
     this.paddle = new Paddle(this);
+    this.life = new Life(this);
     this.gameBObjects = [];
     this.bricks = [];
     this.currentLevel = 1;
     new InputHandler(this.paddle, this, GAMESTATE);
-    this.resetLives();
   }
 
   start() {
     if (this.gamestate !== GAMESTATE.MENU && this.gamestate !== GAMESTATE.GAMEOVER && this.gamestate !== GAMESTATE.NEWLEVEL) return;
     this.bricks = buildLevel(this, generateRandomObstacles(this.currentLevel));
-    this.gameBObjects = [this.ball, this.paddle];
+    this.gameBObjects = [this.ball, this.paddle, this.life];
     this.ball.reset();
     this.paddle.reset();
     this.gamestate = GAMESTATE.RUNNING;
@@ -47,7 +49,7 @@ export default class Game {
       this.gamestate === GAMESTATE.MENU ||
       this.gamestate === GAMESTATE.GAMEOVER
       ) return;
-    [...this.gameBObjects, ...this.bricks].forEach((object) => object.update(deltaTime));
+    [...this.gameBObjects, ...this.bricks].forEach((object) => object.update(this, deltaTime));
     if (this.bricks.length === 0) {
       this.currentLevel++;
       this.gamestate = GAMESTATE.NEWLEVEL;

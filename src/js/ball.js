@@ -1,4 +1,4 @@
-import { detectCollision, detectCollisionLeftSidePaddle } from "./collisionDetection.js"
+import { detectCollision, detectCollisionLeftSidePaddle } from "./collisionDetection.js";
 
 export default class Ball {
 
