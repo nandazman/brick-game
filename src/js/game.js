@@ -2,7 +2,7 @@ import Paddle from "./paddle.js";
 import InputHandler from "./input.js";
 import Ball from "./ball.js";
 
-import { buildLevel, levels } from "./levels.js";
+import { buildLevel, generateRandomObstacles } from "./levels.js";
 import { pause, menu, gameOver } from "./screen.js";
 
 const GAMESTATE = {
@@ -22,15 +22,14 @@ export default class Game {
     this.paddle = new Paddle(this);
     this.gameBObjects = [];
     this.bricks = [];
-    this.currentLevel = 0;
-    this.levels = levels;
+    this.currentLevel = 1;
     new InputHandler(this.paddle, this, GAMESTATE);
     this.resetLives();
   }
 
   start() {
     if (this.gamestate !== GAMESTATE.MENU && this.gamestate !== GAMESTATE.GAMEOVER && this.gamestate !== GAMESTATE.NEWLEVEL) return;
-    this.bricks = buildLevel(this, this.levels[this.currentLevel]);
+    this.bricks = buildLevel(this, generateRandomObstacles(this.currentLevel));
     this.gameBObjects = [this.ball, this.paddle];
     this.ball.reset();
     this.paddle.reset();
